@@ -1,0 +1,20 @@
+name: Daily Fact Update
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # Запуск каждый день в полночь UTC (можешь настроить время)
+
+jobs:
+  generate-fact:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Run script
+        run: python generate_fact.py
