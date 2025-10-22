@@ -11,6 +11,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }} # Используем встроенный токен
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -24,11 +26,11 @@ jobs:
         run: ls -la
 
       - name: Commit and push changes
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: 'Добавлен новый факт: fact-{{ date }}.md'
-          file_pattern: 'fact-*.md'
-          branch: main
-          commit_user_name: 'github-actions[bot]'
-          commit_user_email: '41898282+github-actions[bot]@users.noreply.github.com'
-          push_options: '--force' # Принудительный пуш, если есть конфликт
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add fact-*.md
+          git commit -m "Добавлен новый факт: fact-{{ date }}.md" || echo "No changes to commit"
+          git push origin main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Передаём токен для пуша
