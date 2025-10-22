@@ -3,7 +3,7 @@ name: Daily Fact Update
 on:
   schedule:
     - cron: '0 0 * * *' # Запуск каждый день в полночь UTC
-  workflow_dispatch: # Добавляем возможность ручного запуска
+  workflow_dispatch: # Возможность ручного запуска
 
 jobs:
   generate-fact:
@@ -19,3 +19,10 @@ jobs:
 
       - name: Run script
         run: python generate_fact.py
+
+      - name: Commit and push changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: 'Добавлен новый факт: fact-{{ date }}.md'
+          file_pattern: 'fact-*.md'
+          branch: main
