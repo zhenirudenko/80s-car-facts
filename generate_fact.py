@@ -3,7 +3,7 @@ import random
 import datetime
 
 # Читаем файл с фактами
-with open('facts.json.txt', 'r', encoding='utf-8') as file:
+with open('facts.json', 'r', encoding='utf-8') as file:
     facts = json.load(file)
 
 # Выбираем случайный факт
