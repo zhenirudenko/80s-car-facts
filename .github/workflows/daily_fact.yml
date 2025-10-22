@@ -2,7 +2,8 @@ name: Daily Fact Update
 
 on:
   schedule:
-    - cron: '0 0 * * *' # Запуск каждый день в полночь UTC (можешь настроить время)
+    - cron: '0 0 * * *' # Запуск каждый день в полночь UTC
+  workflow_dispatch: # Добавляем возможность ручного запуска
 
 jobs:
   generate-fact:
