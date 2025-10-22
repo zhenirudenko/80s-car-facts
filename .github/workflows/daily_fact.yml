@@ -11,8 +11,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-        with:
-          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -31,3 +29,4 @@ jobs:
           commit_user_name: 'github-actions[bot]'
           commit_user_email: '41898282+github-actions[bot]@users.noreply.github.com'
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          push_options: '--force' # Принудительный пуш, если есть конфликт
