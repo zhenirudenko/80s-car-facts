@@ -12,7 +12,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
         with:
-          token: ${{ secrets.GITHUB_TOKEN }} # Используем встроенный токен
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -31,6 +31,6 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add fact-*.md
           git commit -m "Добавлен новый факт: fact-{{ date }}.md" || echo "No changes to commit"
-          git push origin main
+          git push https://${{ secrets.GITHUB_TOKEN }}@github.com/zhenirudenko/80s-car-facts.git HEAD:main
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Передаём токен для пуша
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
